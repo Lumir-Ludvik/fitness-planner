@@ -1,0 +1,32 @@
+.header-container {
+  border-radius: 8px;
+  background-color: rgba(66, 201, 174, 0.76);
+  display: flex;
+  align-items: center;
+
+  .header-logo {
+    width: 60px;
+    height: auto;
+  }
+
+  h1 {
+    margin-right: 3rem;
+  }
+
+  button {
+    padding: 1rem;
+    border: none;
+
+    background-color: rgba(111, 214, 193, 0.66);
+
+    &:hover {
+      border-radius: 8px;
+      border-color: rgb(227, 125, 50);
+      background-color: rgb(227, 125, 50);
+    }
+  }
+
+  * {
+    margin: 0 0.5rem 0 0.5rem;
+  }
+}

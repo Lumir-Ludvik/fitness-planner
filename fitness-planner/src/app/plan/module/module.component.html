@@ -1,0 +1,9 @@
+<div class="module-container" [dndDraggable]="{ title, text, imagePath }">
+  <div dndHandle>
+    <h3>{{ title }}</h3>
+    <div class="module-detail-container">
+      <img class="module-image" [src]="imagePath" alt="fitness-image" />
+      <div>{{ text }}</div>
+    </div>
+  </div>
+</div>
