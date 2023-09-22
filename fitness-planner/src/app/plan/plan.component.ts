@@ -1,7 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, effect } from "@angular/core";
 import { DndDropEvent } from "ngx-drag-drop";
-import { Days, Module } from "./types";
+import { CalendarDataType, Days, Module } from "./types";
 import { originalOrder } from "../../utils/sort-utils";
+import { ModuleService } from "./services/module.service";
 
 @Component({
   selector: "app-plan",
@@ -9,20 +10,17 @@ import { originalOrder } from "../../utils/sort-utils";
   styleUrls: ["./plan.component.scss"]
 })
 export class PlanComponent {
-  CalendarData: Record<Days, Module[]> = {
-    Monday: [],
-    Tuesday: [],
-    Wednesday: [],
-    Thursday: [],
-    Friday: [],
-    Saturday: [],
-    Sunday: []
-  };
-
-  onDrop({ data }: DndDropEvent, dayKey: string) {
-    this.CalendarData[dayKey as Days].push(data);
+  protected readonly originalOrder = originalOrder;
+  public modules: Module[] = [];
+  public calendarData: CalendarDataType = {} as CalendarDataType;
+  constructor(private readonly moduleService: ModuleService) {
+    effect(() => {
+      this.modules = this.moduleService.getModules();
+      this.calendarData = this.moduleService.getCalendarData();
+    });
   }
 
-  protected readonly Object = Object;
-  protected readonly originalOrder = originalOrder;
+  public onDrop({ data }: DndDropEvent, dayKey: string) {
+    this.moduleService.setCalendarData(data, dayKey as Days);
+  }
 }

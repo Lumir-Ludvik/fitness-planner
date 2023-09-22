@@ -14,6 +14,7 @@ import {
   DndDropzoneDirective,
   DndHandleDirective
 } from "ngx-drag-drop";
+import { ModuleService } from "./plan/services/module.service";
 
 const appRoutes: Routes = [
   { path: "plan", component: PlanComponent },
@@ -39,7 +40,7 @@ const appRoutes: Routes = [
     DndDraggableDirective,
     DndHandleDirective
   ],
-  providers: [],
+  providers: [ModuleService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

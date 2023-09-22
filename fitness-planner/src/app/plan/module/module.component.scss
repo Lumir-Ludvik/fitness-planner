@@ -4,11 +4,12 @@
   box-shadow: black 3px 3px 3px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-bottom: 0.5rem;
+  text-align: center;
 
   .module-detail-container{
     display: flex;
+    text-align: initial;
 
     .module-image {
       width: 50%;

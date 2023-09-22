@@ -1,27 +1,25 @@
 <div class="plan-container">
   <div class="plan-menu">
     <app-module
-      title="MODULE1"
-      imagePath="./assets/img/test.png"
-      text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad adipisci beatae, dolorum eaque in ipsum natus neque nesciunt nihil nisi, non provident quidem quis recusandae sed sequi tempore unde!" />
-
-    <app-module
-      title="MODULE2"
-      imagePath="./assets/img/test.png"
-      text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad adipisci beatae, dolorum eaque in ipsum natus neque nesciunt nihil nisi, non provident quidem quis recusandae sed sequi tempore unde!" />
+      *ngFor="let module of modules"
+      [id]="module.id"
+      [text]="module.text"
+      [title]="module.title"
+      [imagePath]="module.imagePath" />
   </div>
 
   <div class="plan-day-container">
     <div class="plan-day-overflow-container">
       <div
         class="plan-day"
-        *ngFor="let day of CalendarData | keyvalue: originalOrder"
+        *ngFor="let day of calendarData | keyvalue: originalOrder"
         dndDropzone
         (dndDrop)="onDrop($event, day.key)">
         <h2>{{ day.key }}</h2>
         <hr />
         <app-module
           *ngFor="let module of day.value"
+          [id]="module.id"
           [title]="module.title"
           [text]="module.text"
           [imagePath]="module.imagePath" />
