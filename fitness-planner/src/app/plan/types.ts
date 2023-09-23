@@ -10,10 +10,10 @@ export type Days =
   | "Sunday";
 
 export type Module = {
-  id: number;
+  id?: number;
   title: string;
   text: string;
-  imagePath: string;
+  image: Blob;
 };
 
 export type CalendarDataType = Record<Days, Module[]>;

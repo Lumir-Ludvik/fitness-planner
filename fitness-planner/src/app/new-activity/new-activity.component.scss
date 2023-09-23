@@ -1,0 +1,19 @@
+.new-activity-form {
+  display: flex;
+  flex-direction: column;
+
+  input,
+  textarea {
+    max-width: 15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  button {
+    max-width: fit-content;
+    padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+  }
+
+  .invalid {
+    color: red;
+  }
+}

@@ -7,6 +7,7 @@ import { NewActivityComponent } from "./new-activity/new-activity.component";
 import { ActivitiesComponent } from "./activities/activities.component";
 import { ModuleService } from "./plan/services/module.service";
 import { PlanModule } from "./plan/plan.module";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { PlanModule } from "./plan/plan.module";
     NewActivityComponent,
     ActivitiesComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, PlanModule],
+  imports: [BrowserModule, AppRoutingModule, PlanModule, ReactiveFormsModule],
   providers: [ModuleService],
   bootstrap: [AppComponent]
 })

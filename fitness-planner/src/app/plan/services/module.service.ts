@@ -5,20 +5,7 @@ import { CalendarDataType, Days, Module } from "../types";
   providedIn: "root"
 })
 export class ModuleService {
-  private modules = signal<Module[]>([
-    {
-      id: 1,
-      title: "Cardio",
-      imagePath: "./assets/img/test.png",
-      text: "Core of all fat burning exercise"
-    },
-    {
-      id: 2,
-      title: "Biceps exercise",
-      imagePath: "./assets/img/test.png",
-      text: "Lifting for the win fdsfsfhjdsfsfhjsfjshfkshfskjfhsjkfshfkdsjfhsjkfhsfksjhf"
-    }
-  ]);
+  private modules = signal<Module[]>([]);
 
   private CalendarData = signal<CalendarDataType>({
     Monday: [],
@@ -32,7 +19,7 @@ export class ModuleService {
 
   public getModules = () => this.modules();
 
-  public setModule = (value: Module) =>
+  public addModule = (value: Module) =>
     this.modules.mutate(modules => modules.push(value));
 
   public updateModule = (nextValue: Module) =>

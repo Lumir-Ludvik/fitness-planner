@@ -9,15 +9,16 @@ import { ModuleService } from "../services/module.service";
 })
 export class ModuleComponent {
   @Input() day?: string;
-  @Input({ required: true }) id!: number;
+  @Input({ required: true }) id?: number;
   @Input({ required: true }) title!: string;
-  @Input({ required: true }) imagePath!: string;
+  @Input({ required: true }) image!: Blob;
   @Input() text!: string;
 
+  public imageUrl = URL.createObjectURL(this.image);
   constructor(private moduleService: ModuleService) {}
 
   public onDelete() {
-    if (!this.day) {
+    if (!this.day || !this.id) {
       return;
     }
 

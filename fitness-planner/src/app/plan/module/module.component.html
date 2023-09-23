@@ -1,4 +1,4 @@
-<div class="module-container" [dndDraggable]="{ title, text, imagePath, id }">
+<div class="module-container" [dndDraggable]="{ title, text, image, id }">
   <div dndHandle>
     <div class="module-header">
       <h3>{{ title }}</h3>
@@ -9,7 +9,7 @@
     <div class="module-detail-container">
       <img
         class="module-image"
-        ngSrc="{{ imagePath }}"
+        ngSrc="{{ imageUrl }}"
         alt="fitness-image"
         width="100"
         height="60" />

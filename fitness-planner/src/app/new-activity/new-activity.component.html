@@ -1,1 +1,45 @@
-<p>new-activity works!</p>
+<form
+  class="new-activity-form"
+  action=""
+  [formGroup]="activityForm"
+  (ngSubmit)="onSubmit()">
+  <label for="title">Title: </label>
+  <input id="title" type="text" formControlName="title" placeholder="title" />
+  <div
+    *ngIf="
+      activityForm.controls.title.invalid && activityForm.controls.title.dirty
+    "
+    class="invalid">
+    Field is required
+  </div>
+
+  <label for="image">Image: </label>
+  <input
+    id="image"
+    type="file"
+    formControlName="image"
+    (change)="onImageUploaded($event)" />
+  <div
+    *ngIf="
+      activityForm.controls.image.invalid && activityForm.controls.image.dirty
+    "
+    class="invalid">
+    Field is required
+  </div>
+
+  <label for="text">Summary: </label>
+  <textarea
+    id="text"
+    formControlName="text"
+    rows="4"
+    placeholder="description"></textarea>
+  <div
+    *ngIf="
+      activityForm.controls.text.invalid && activityForm.controls.text.dirty
+    "
+    class="invalid">
+    Field is required
+  </div>
+
+  <button type="submit" [disabled]="!activityForm.valid">Add</button>
+</form>
