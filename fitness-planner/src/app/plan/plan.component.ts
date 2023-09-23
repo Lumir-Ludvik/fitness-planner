@@ -1,6 +1,6 @@
 import { Component, effect } from "@angular/core";
 import { DndDropEvent } from "ngx-drag-drop";
-import { CalendarDataType, Days, Module } from "./types";
+import { CalendarDataType, Days } from "./types";
 import { originalOrder } from "../../utils/sort-utils";
 import { ModuleService } from "./services/module.service";
 
@@ -11,11 +11,10 @@ import { ModuleService } from "./services/module.service";
 })
 export class PlanComponent {
   protected readonly originalOrder = originalOrder;
-  public modules: Module[] = [];
   public calendarData: CalendarDataType = {} as CalendarDataType;
+
   constructor(private readonly moduleService: ModuleService) {
     effect(() => {
-      this.modules = this.moduleService.getModules();
       this.calendarData = this.moduleService.getCalendarData();
     });
   }

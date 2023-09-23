@@ -16,7 +16,7 @@ export class ModuleService {
       id: 2,
       title: "Biceps exercise",
       imagePath: "./assets/img/test.png",
-      text: "Lifting for the win"
+      text: "Lifting for the win fdsfsfhjdsfsfhjsfjshfkshfskjfhsjkfshfkdsjfhsjkfhsfksjhf"
     }
   ]);
 
@@ -53,5 +53,9 @@ export class ModuleService {
     });
 
   public removeCalendarData = (id: number, day: Days) =>
-    this.CalendarData.mutate(data => data[day].filter(x => x.id !== id));
+    this.CalendarData.update(data => {
+      const module = data[day].filter(x => x.id !== id);
+
+      return { ...data, [day]: module };
+    });
 }

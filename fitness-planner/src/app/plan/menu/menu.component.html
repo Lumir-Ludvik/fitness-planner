@@ -1,0 +1,8 @@
+<div class="plan-menu">
+  <app-module
+    *ngFor="let module of modules"
+    [id]="module.id"
+    [text]="module.text"
+    [title]="module.title"
+    [imagePath]="module.imagePath" />
+</div>

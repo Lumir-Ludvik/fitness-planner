@@ -1,8 +1,18 @@
 <div class="module-container" [dndDraggable]="{ title, text, imagePath, id }">
   <div dndHandle>
-    <h3>{{ title }}</h3>
+    <div class="module-header">
+      <h3>{{ title }}</h3>
+      <span tabindex="0" *ngIf="day" (click)="onDelete()" (keyup)="onDelete()">
+        X
+      </span>
+    </div>
     <div class="module-detail-container">
-      <img class="module-image" [src]="imagePath" alt="fitness-image" />
+      <img
+        class="module-image"
+        ngSrc="{{ imagePath }}"
+        alt="fitness-image"
+        width="100"
+        height="60" />
       <div>{{ text }}</div>
     </div>
   </div>
