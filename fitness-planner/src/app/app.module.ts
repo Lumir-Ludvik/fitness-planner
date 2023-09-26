@@ -8,6 +8,7 @@ import { ActivitiesComponent } from "./activities/activities.component";
 import { ModuleService } from "./plan/services/module.service";
 import { PlanModule } from "./plan/plan.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     NewActivityComponent,
     ActivitiesComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, PlanModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, PlanModule, ReactiveFormsModule, BrowserAnimationsModule],
   providers: [ModuleService],
   bootstrap: [AppComponent]
 })

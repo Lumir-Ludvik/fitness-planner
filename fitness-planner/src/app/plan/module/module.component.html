@@ -1,5 +1,5 @@
-<div class="module-container" [dndDraggable]="{ title, text, image, id }">
-  <div dndHandle>
+<div class="module-container" cdkDrag [cdkDragData]="module">
+  <div>
     <div class="module-header">
       <h3>{{ title }}</h3>
       <span tabindex="0" *ngIf="day" (click)="onDelete()" (keyup)="onDelete()">
@@ -9,7 +9,7 @@
     <div class="module-detail-container">
       <img
         class="module-image"
-        ngSrc="{{ imageUrl }}"
+        [src]="imageUrl"
         alt="fitness-image"
         width="100"
         height="60" />

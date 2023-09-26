@@ -37,7 +37,8 @@ export class NewActivityComponent {
     //   reader.onload = () => resolve(reader.result);
     //   reader.onerror = error => reject(error);
     // });
-
-    this.activityForm.controls.image.setValue(file);
+    this.activityForm
+      .get("image")
+      ?.patchValue(new Blob([file], { type: "image/png" }));
   }
 }

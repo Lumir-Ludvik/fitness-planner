@@ -1,5 +1,3 @@
-import { EffectAllowed } from "ngx-drag-drop";
-
 export type Days =
   | "Monday"
   | "Tuesday"
@@ -17,5 +15,3 @@ export type Module = {
 };
 
 export type CalendarDataType = Record<Days, Module[]>;
-
-export type DragAndDropType = { effectAllowed: EffectAllowed; data: Module };

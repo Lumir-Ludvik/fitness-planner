@@ -1,5 +1,5 @@
-import { Component, Input } from "@angular/core";
-import { Days } from "../types";
+import { Component, Input, OnInit } from "@angular/core";
+import { Days, Module } from "../types";
 import { ModuleService } from "../services/module.service";
 
 @Component({
@@ -7,14 +7,29 @@ import { ModuleService } from "../services/module.service";
   templateUrl: "./module.component.html",
   styleUrls: ["./module.component.scss"]
 })
-export class ModuleComponent {
+export class ModuleComponent implements OnInit {
   @Input() day?: string;
   @Input({ required: true }) id?: number;
   @Input({ required: true }) title!: string;
   @Input({ required: true }) image!: Blob;
   @Input() text!: string;
 
-  public imageUrl = URL.createObjectURL(this.image);
+  public imageUrl: string | null = null;
+  public module: Module | null = null;
+
+  public ngOnInit() {
+    debugger;
+    if (this.image instanceof Blob) {
+      this.imageUrl = URL.createObjectURL(this.image);
+      this.module = {
+        id: this.id,
+        image: this.image,
+        text: this.text,
+        title: this.title
+      };
+    }
+  }
+
   constructor(private moduleService: ModuleService) {}
 
   public onDelete() {

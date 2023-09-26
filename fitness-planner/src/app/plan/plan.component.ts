@@ -1,8 +1,8 @@
 import { Component, effect } from "@angular/core";
-import { DndDropEvent } from "ngx-drag-drop";
 import { CalendarDataType, Days } from "./types";
 import { originalOrder } from "../../utils/sort-utils";
 import { ModuleService } from "./services/module.service";
+import { CdkDrag } from "@angular/cdk/drag-drop";
 
 @Component({
   selector: "app-plan",
@@ -19,7 +19,8 @@ export class PlanComponent {
     });
   }
 
-  public onDrop({ data }: DndDropEvent, dayKey: string) {
-    this.moduleService.setCalendarData(data, dayKey as Days);
+  public onDrop(item: CdkDrag, dayKey: string) {
+    debugger;
+    this.moduleService.setCalendarData(item.data, dayKey as Days);
   }
 }

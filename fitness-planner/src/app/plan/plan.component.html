@@ -1,4 +1,4 @@
-<div class="plan-container">
+<div class="plan-container" cdkDropListGroup>
   <app-menu />
 
   <div class="plan-day-container">
@@ -6,9 +6,10 @@
       <!--TODO: fix types-->
       <div
         class="plan-day"
+        cdkDropList
+        (cdkDropListDropped)="onDrop($event.item, day.key)"
         *ngFor="let day of calendarData | keyvalue: originalOrder"
-        dndDropzone
-        (dndDrop)="onDrop($event, day.key)">
+        [cdkDropListData]="day.value">
         <h2>{{ day.key }}</h2>
         <hr />
         <app-module
