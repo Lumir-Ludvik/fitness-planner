@@ -16,7 +16,7 @@ export class NewActivityComponent {
 
   public activityForm = this.formBuilder.group({
     title: this.formBuilder.control<string>("", Validators.required),
-    image: this.formBuilder.control<Blob | null>(null, Validators.required),
+    image: this.formBuilder.control<Blob | string>("", Validators.required),
     text: this.formBuilder.control<string>("", Validators.required)
   });
 
@@ -30,13 +30,7 @@ export class NewActivityComponent {
     if (!file) {
       return;
     }
-    //
-    // const base64 = await new Promise((resolve, reject) => {
-    //   const reader = new FileReader();
-    //   reader.readAsDataURL(file);
-    //   reader.onload = () => resolve(reader.result);
-    //   reader.onerror = error => reject(error);
-    // });
+
     this.activityForm
       .get("image")
       ?.patchValue(new Blob([file], { type: "image/png" }));

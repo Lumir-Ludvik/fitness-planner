@@ -20,7 +20,6 @@ export class PlanComponent {
   }
 
   public onDrop(item: CdkDrag, dayKey: string) {
-    debugger;
     this.moduleService.setCalendarData(item.data, dayKey as Days);
   }
 }

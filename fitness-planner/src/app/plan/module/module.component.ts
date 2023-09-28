@@ -18,7 +18,6 @@ export class ModuleComponent implements OnInit {
   public module: Module | null = null;
 
   public ngOnInit() {
-    debugger;
     if (this.image instanceof Blob) {
       this.imageUrl = URL.createObjectURL(this.image);
       this.module = {

@@ -1,39 +1,32 @@
 .module-container {
+  padding: 0.5rem;
   border-radius: 8px;
   border: solid #6ed4bf 2px;
   box-shadow: black 3px 3px 3px;
   display: flex;
   flex-direction: column;
   margin-bottom: 0.5rem;
-  text-align: center;
   width: 15rem;
+  height: 10rem;
 
-  .module-header {
-    display: flex;
-    justify-content: center;
-
-    h3 {
-      margin: 0.5rem auto 0.5rem auto;
-    }
-
-    span {
-      margin: 0.5rem 0.5rem 0 auto;
-    }
+  span {
+    margin-left: auto;
   }
 
-  .module-detail-container {
-    display: flex;
-    text-align: initial;
+  h3 {
+    text-align: center;
+  }
 
-    .module-image {
-      border-bottom-left-radius: 6px;
-      object-fit: scale-down;
-      margin: 0 0.5rem 0 0;
-    }
+  .module-image {
+    object-fit: scale-down;
+    margin: 0 0.5rem 0.5rem 0;
+    max-width: 5rem;
+    height: auto;
+    float: left;
+  }
 
-    div {
-      overflow-wrap: anywhere;
-      white-space: break-spaces;
-    }
+  div {
+    overflow-wrap: anywhere;
+    white-space: break-spaces;
   }
 }
