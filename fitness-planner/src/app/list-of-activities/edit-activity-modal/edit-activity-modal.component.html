@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Edit Module:</h1>
+
+<div mat-dialog-content>
+  <app-activity-form [module]="module" (submitted)="onSubmitted($event)" />
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="wasSuccessful">Close</button>
+</div>

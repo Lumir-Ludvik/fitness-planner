@@ -1,14 +1,14 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { PlanComponent } from "./plan/plan.component";
-import { ActivitiesComponent } from "./activities/activities.component";
-import { NewActivityComponent } from "./new-activity/new-activity.component";
+import { ActivityFormComponent } from "./activity-form/activity-form.component";
+import { ListOfActivitiesComponent } from "./list-of-activities/list-of-activities.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "plan", pathMatch: "full" },
   { path: "plan", component: PlanComponent },
-  { path: "activities", component: ActivitiesComponent },
-  { path: "new-activity", component: NewActivityComponent }
+  { path: "activities", component: ListOfActivitiesComponent },
+  { path: "activity-form", component: ActivityFormComponent }
 ];
 
 @NgModule({

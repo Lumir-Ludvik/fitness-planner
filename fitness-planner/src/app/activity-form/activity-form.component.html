@@ -15,9 +15,13 @@
 
   <label for="image">Image: </label>
   <input
+    *ngIf="activityForm.controls.image.getRawValue() === null"
     id="image"
     accept="image/*"
     type="file"
+    [textContent]="module?.image?.filename"
+    [files]="module?.image?.data"
+    [value]="module?.image?.filename"
     (change)="onImageUploaded($event)" />
   <div
     *ngIf="
@@ -25,6 +29,15 @@
     "
     class="invalid">
     Field is required
+  </div>
+
+  <div
+    class="selected-image"
+    *ngIf="activityForm.controls.image.getRawValue()?.filename">
+    <p>
+      {{ activityForm.controls.image.getRawValue()?.filename }}
+    </p>
+    <button (click)="deleteImage()">X</button>
   </div>
 
   <label for="text">Summary: </label>

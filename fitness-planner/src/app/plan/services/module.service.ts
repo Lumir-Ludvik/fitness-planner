@@ -22,13 +22,24 @@ export class ModuleService {
   public addModule = (value: Module) =>
     this.modules.mutate(modules => modules.push(value));
 
-  public updateModule = (nextValue: Module) =>
-    this.modules.update(modules => {
-      const index = modules.findIndex(m => m.id === nextValue.id);
+  public deleteModule = (id: number) =>
+    this.modules.update(modules => modules.filter(module => module.id !== id));
+
+  public updateModule = (nextValue: Module) => {
+    const index = this.getModules().findIndex(m => m.id === nextValue.id);
+
+    if (index === -1) {
+      return false;
+    }
+
+    this.modules.mutate(modules => {
       modules[index] = nextValue;
 
       return modules;
     });
+
+    return true;
+  };
 
   public getCalendarData = () => this.CalendarData();
 

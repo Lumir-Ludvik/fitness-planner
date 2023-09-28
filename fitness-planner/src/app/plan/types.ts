@@ -11,7 +11,7 @@ export type Module = {
   id?: number;
   title: string;
   text: string;
-  image: Blob;
+  image: { filename: string; data: Blob };
 };
 
 export type CalendarDataType = Record<Days, Module[]>;
