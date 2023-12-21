@@ -5,7 +5,14 @@ import { CalendarDataType, Days, Module } from "../types";
   providedIn: "root"
 })
 export class ModuleService {
-  private modules = signal<Module[]>([]);
+  private modules = signal<Module[]>([
+    {
+      id: 1,
+      image: { data: new Blob(), filename: "aaa" },
+      text: "aa",
+      title: "aaa"
+    }
+  ]);
 
   private CalendarData = signal<CalendarDataType>({
     Monday: [],
