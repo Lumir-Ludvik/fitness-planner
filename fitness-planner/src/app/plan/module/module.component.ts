@@ -19,7 +19,7 @@ export class ModuleComponent implements OnInit {
   constructor(private moduleService: ModuleService) {}
 
   public ngOnInit() {
-    if (!(this.image instanceof Blob)) {
+    if (!(this.image.data instanceof Blob)) {
       return;
     }
 
