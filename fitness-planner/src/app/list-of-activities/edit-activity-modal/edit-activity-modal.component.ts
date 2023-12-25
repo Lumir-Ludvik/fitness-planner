@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Module } from "../../plan/types";
+import { Module } from "../../models/plan/types";
 
 @Component({
   selector: "app-edit-activity-modal",

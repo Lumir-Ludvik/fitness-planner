@@ -1,7 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ModuleService } from "../plan/services/module.service";
-import { Module } from "../plan/types";
+import { Module } from "../models/plan/types";
+import { Store } from "@ngxs/store";
+import {
+  AddModule,
+  UpdateModule
+} from "../states/actions/fitness-plan-state-actions";
 
 @Component({
   selector: "app-activity-form",
@@ -18,7 +23,7 @@ export class ActivityFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private moduleService: ModuleService
+    private store: Store
   ) {}
 
   public ngOnInit() {
@@ -47,13 +52,17 @@ export class ActivityFormComponent implements OnInit {
     } as Module;
 
     if (this.isEdit) {
-      const res = this.moduleService.updateModule(module);
-      this.submitted.emit(res);
+      try {
+        this.store.dispatch(new UpdateModule(module));
+        this.submitted.emit(true);
+      } catch (e) {
+        this.submitted.emit(false);
+      }
 
       return;
     }
 
-    this.moduleService.addModule(module);
+    this.store.dispatch(new AddModule(module));
     this.submitted.emit(true);
   }
 

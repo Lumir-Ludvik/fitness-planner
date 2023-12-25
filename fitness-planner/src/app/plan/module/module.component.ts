@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Days, Module } from "../types";
-import { ModuleService } from "../services/module.service";
+import { Days, Module } from "../../models/plan/types";
+import { Store } from "@ngxs/store";
+import { RemoveCalendarData } from "../../states/actions/fitness-plan-state-actions";
 
 @Component({
   selector: "app-module",
@@ -8,7 +9,7 @@ import { ModuleService } from "../services/module.service";
   styleUrls: ["./module.component.scss"]
 })
 export class ModuleComponent implements OnInit {
-  @Input() day?: string;
+  @Input({ transform: (value: string): Days => value as Days }) day?: Days;
   @Input({ required: true }) id?: number;
   @Input({ required: true }) title!: string;
   @Input({ required: true }) image!: { filename: string; data: Blob };
@@ -16,7 +17,7 @@ export class ModuleComponent implements OnInit {
 
   public imageUrl: string | null = null;
   public module: Module | null = null;
-  constructor(private moduleService: ModuleService) {}
+  constructor(private store: Store) {}
 
   public ngOnInit() {
     if (!(this.image.data instanceof Blob)) {
@@ -37,6 +38,6 @@ export class ModuleComponent implements OnInit {
       return;
     }
 
-    this.moduleService.removeCalendarData(this.id, this.day as Days);
+    this.store.dispatch(new RemoveCalendarData(this.id, this.day));
   }
 }

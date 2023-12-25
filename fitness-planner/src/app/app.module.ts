@@ -14,6 +14,8 @@ import { EditActivityModalComponent } from "./list-of-activities/edit-activity-m
 import { MatSortModule } from "@angular/material/sort";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
+import { NgxsModule } from "@ngxs/store";
+import { FitnessPlanState } from "./states/state/fitness-plan-state";
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { MatButtonModule } from "@angular/material/button";
     EditActivityModalComponent
   ],
   imports: [
+    NgxsModule.forRoot([FitnessPlanState]),
     BrowserModule,
     AppRoutingModule,
     PlanModule,
