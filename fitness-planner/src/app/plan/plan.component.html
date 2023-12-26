@@ -8,12 +8,15 @@
         class="plan-day"
         cdkDropList
         (cdkDropListDropped)="onDrop($event.item, day.key)"
-        *ngFor="let day of calendarData | keyvalue: originalOrder"
+        *ngFor="
+          let day of calendarData | keyvalue: originalOrder;
+          trackBy: dayTrackBy
+        "
         [cdkDropListData]="day.value">
         <h2>{{ day.key }}</h2>
         <hr />
         <app-module
-          *ngFor="let module of day.value"
+          *ngFor="let module of day.value; trackBy: moduleTrackBy"
           [day]="day.key"
           [id]="module.id"
           [title]="module.title"

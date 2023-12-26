@@ -3,6 +3,7 @@ import { CalendarDataType, Days } from "./types";
 import { originalOrder } from "../../utils/sort-utils";
 import { ModuleService } from "./services/module.service";
 import { CdkDrag } from "@angular/cdk/drag-drop";
+import { dayTrackBy, moduleTrackBy } from "./module/helpers/module.helper";
 
 @Component({
   selector: "app-plan",
@@ -11,6 +12,9 @@ import { CdkDrag } from "@angular/cdk/drag-drop";
 })
 export class PlanComponent {
   protected readonly originalOrder = originalOrder;
+  protected readonly moduleTrackBy = moduleTrackBy;
+  protected readonly dayTrackBy = dayTrackBy;
+
   public calendarData: CalendarDataType = {} as CalendarDataType;
 
   constructor(private readonly moduleService: ModuleService) {
