@@ -15,3 +15,8 @@ export type Module = {
 };
 
 export type CalendarDataType = Record<Days, Module[]>;
+
+export type FitnessPlanStateType = {
+  modules: Module[];
+  calendarData: CalendarDataType;
+};

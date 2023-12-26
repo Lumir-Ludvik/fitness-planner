@@ -1,11 +1,20 @@
 import { Injectable, signal } from "@angular/core";
-import { CalendarDataType, Days, Module } from "../types";
+import { CalendarDataType, Days, Module } from "../../models/plan/types";
+import { b64toBlob } from "../../../utils/img-utils";
+import { TEST_IMAGE } from "../../testing/mocks/test-image-base64";
 
 @Injectable({
   providedIn: "root"
 })
 export class ModuleService {
-  private modules = signal<Module[]>([]);
+  private modules = signal<Module[]>([
+    {
+      id: 1,
+      image: { data: b64toBlob(TEST_IMAGE), filename: "big-biceps" },
+      title: "I the big biceps",
+      text: "I wish I was a big biceps"
+    }
+  ]);
 
   private CalendarData = signal<CalendarDataType>({
     Monday: [],

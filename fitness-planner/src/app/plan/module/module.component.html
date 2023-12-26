@@ -2,9 +2,13 @@
   <span tabindex="0" *ngIf="day" (click)="onDelete()" (keyup)="onDelete()">
     X
   </span>
-  <h3>{{ title }}</h3>
+  <h3 data-testid="module-title">{{ title }}</h3>
   <div>
-    <img class="module-image" [src]="imageUrl" alt="fitness-image" />
-    <div>{{ text }}</div>
+    <img
+      class="module-image"
+      data-testid="module-image"
+      [src]="imageUrl"
+      alt="fitness-image" />
+    <div data-testid="module-text">{{ text }}</div>
   </div>
 </div>
