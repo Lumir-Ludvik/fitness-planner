@@ -1,6 +1,6 @@
 <div class="plan-menu" cdkDropList>
   <app-module
-    *ngFor="let module of modules; trackBy: moduleTrackBy"
+    *ngFor="let module of modules(); trackBy: moduleTrackBy"
     [id]="module.id"
     [text]="module.text"
     [title]="module.title"

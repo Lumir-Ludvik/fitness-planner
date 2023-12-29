@@ -1,3 +1,5 @@
+import { base64RegExParser } from "./regex-utils";
+
 export const b64toBlob = (
   b64Data: string,
   contentType = "",
@@ -21,3 +23,13 @@ export const b64toBlob = (
   const blob = new Blob(byteArrays, { type: contentType });
   return blob;
 };
+
+export const blobToBase64 = (blob): Promise<string> =>
+  new Promise(resolve => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      return resolve((reader.result as string).match(base64RegExParser)[0]);
+    };
+    reader.readAsDataURL(blob);
+  });

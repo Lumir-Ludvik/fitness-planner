@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { Days, Module } from "../../models/plan/types";
 import { Store } from "@ngxs/store";
 import { RemoveCalendarData } from "../../states/actions/fitness-plan-state-actions";
+import { Guid } from "guid-typescript";
 
 @Component({
   selector: "app-module",
@@ -10,7 +11,7 @@ import { RemoveCalendarData } from "../../states/actions/fitness-plan-state-acti
 })
 export class ModuleComponent implements OnInit {
   @Input({ transform: (value: string): Days => value as Days }) day?: Days;
-  @Input({ required: true }) id?: number;
+  @Input({ required: true }) id?: Guid;
   @Input({ required: true }) title!: string;
   @Input({ required: true }) image!: { filename: string; data: Blob };
   @Input() text!: string;

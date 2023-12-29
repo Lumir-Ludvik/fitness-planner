@@ -14,6 +14,16 @@
       "rules": {
         "semi": "error",
         "quotes": "error",
+        "@typescript-eslint/explicit-member-accessibility": ["error", {
+          "accessibility": "explicit",
+          "overrides": {
+            "accessors": "explicit",
+            "constructors": "off",
+            "methods": "explicit",
+            "properties": "off",
+            "parameterProperties": "explicit"
+          }
+        }],
         "@angular-eslint/directive-selector": [
           "error",
           {

@@ -1,6 +1,6 @@
 import { Injectable, signal } from "@angular/core";
 import { CalendarDataType, Days, Module } from "../../models/plan/types";
-import { b64toBlob } from "../../../utils/img-utils";
+import { b64toBlob } from "../../utils/img-utils";
 import { TEST_IMAGE } from "../../testing/mocks/test-image-base64";
 
 @Injectable({

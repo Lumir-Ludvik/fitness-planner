@@ -1,22 +1,33 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { FitnessPlanStateType } from "../../models/plan/types";
+import {
+  FitnessPlanStateType,
+  Module,
+  ModuleBE
+} from "../../models/plan/types";
 import {
   AddModule,
+  APIErrorResponse,
+  APISuccessResponse,
   DeleteModule,
+  GetFitnessPlanData,
   RemoveCalendarData,
   SetCalendarData,
   UpdateModule
 } from "../actions/fitness-plan-state-actions";
-import { b64toBlob } from "../../../utils/img-utils";
+import { b64toBlob, blobToBase64 } from "../../utils/img-utils";
 import { TEST_IMAGE } from "../../testing/mocks/test-image-base64";
+import { forkJoin } from "rxjs";
+import { ModuleApiService } from "../../api/services/module.api.service";
+import { CalendarApiService } from "../../api/services/calendar.api.service";
+import { Guid } from "guid-typescript";
 
 @State<FitnessPlanStateType>({
   name: "FitnessPlan",
   defaults: {
     modules: [
       {
-        id: 1,
+        id: Guid.create(),
         image: { data: b64toBlob(TEST_IMAGE), filename: "big-biceps" },
         title: "I the big biceps",
         text: "I wish I was a big biceps"
@@ -35,29 +46,102 @@ import { TEST_IMAGE } from "../../testing/mocks/test-image-base64";
 })
 @Injectable()
 export class FitnessPlanState {
+  constructor(
+    private readonly moduleApiService: ModuleApiService,
+    private readonly calendarApiService: CalendarApiService
+  ) {}
+
   @Selector([FitnessPlanState])
-  static getModules(state: FitnessPlanStateType) {
+  public static getModules(state: FitnessPlanStateType) {
     return state.modules;
   }
 
   @Selector([FitnessPlanState])
-  static getCalendarData(state: FitnessPlanStateType) {
+  public static getCalendarData(state: FitnessPlanStateType) {
     return state.calendarData;
   }
 
+  @Action(GetFitnessPlanData)
+  public getFitnessPlanData(
+    ctx: StateContext<FitnessPlanStateType>,
+    action: GetFitnessPlanData
+  ) {
+    forkJoin([
+      this.moduleApiService.getAll(),
+      this.calendarApiService.getAll()
+    ]).subscribe({
+      next: (data: [modules: Module[], monday: Module[]]) => {
+        debugger;
+        ctx.setState({
+          modules: data[0],
+          calendarData: {
+            //TODO: fix API add mapping and services
+            Monday: data[1],
+            Tuesday: data[1],
+            Wednesday: data[1],
+            Thursday: data[1],
+            Friday: data[1],
+            Saturday: data[1],
+            Sunday: data[1]
+          }
+        });
+      },
+      error: err => console.error(err)
+    });
+  }
+
+  @Action(APISuccessResponse)
+  public apiSuccessResponse(
+    ctx: StateContext<FitnessPlanStateType>,
+    action: APISuccessResponse<FitnessPlanStateType>
+  ) {
+    ctx.setState(action.data);
+  }
+
+  @Action(APIErrorResponse)
+  public apiErrorResponse(ctx: StateContext<FitnessPlanStateType>) {
+    //TODO: error handling
+    ctx.setState(null);
+  }
+
   @Action(AddModule)
-  addModule(ctx: StateContext<FitnessPlanStateType>, action: AddModule) {
+  public async addModule(
+    ctx: StateContext<FitnessPlanStateType>,
+    action: AddModule
+  ) {
     const state = ctx.getState();
 
-    ctx.setState({
-      ...state,
-      modules: [...state.modules, action.module]
+    //TODO: add mapping on API side
+    const nextModule: ModuleBE = {
+      id: action.module.id,
+      text: action.module.text,
+      title: action.module.title,
+      filename: action.module.image.filename,
+      base64Img: await blobToBase64(action.module.image.data),
+      //TODO: add content type
+      contentType: "image/png"
+    };
+
+    this.moduleApiService.add(nextModule).subscribe({
+      next: (nextModule: Module) => {
+        ctx.setState({
+          ...state,
+          //TODO: add API mapping
+          modules: [...state.modules, action.module]
+        });
+      },
+      error: err => console.error(err)
     });
   }
 
   @Action(DeleteModule)
-  deleteModule(ctx: StateContext<FitnessPlanStateType>, action: DeleteModule) {
+  public deleteModule(
+    ctx: StateContext<FitnessPlanStateType>,
+    action: DeleteModule
+  ) {
     const state = ctx.getState();
+
+    this.moduleApiService.delete(action.id);
 
     ctx.setState({
       ...state,
@@ -66,7 +150,10 @@ export class FitnessPlanState {
   }
 
   @Action(UpdateModule)
-  updateModule(ctx: StateContext<FitnessPlanStateType>, action: UpdateModule) {
+  public async updateModule(
+    ctx: StateContext<FitnessPlanStateType>,
+    action: UpdateModule
+  ) {
     const state = ctx.getState();
     const moduleIndex = state.modules.findIndex(
       module => module.id === action.nextModule.id
@@ -78,6 +165,17 @@ export class FitnessPlanState {
 
     const nextModules = [...state.modules];
     nextModules[moduleIndex] = action.nextModule;
+    //TODO: add mapping on API side
+    const nextModule: ModuleBE = {
+      id: action.nextModule.id,
+      text: action.nextModule.text,
+      title: action.nextModule.title,
+      filename: action.nextModule.image.filename,
+      base64Img: await blobToBase64(action.nextModule.image.data),
+      //TODO: add content type
+      contentType: "image/png"
+    };
+    this.moduleApiService.update(nextModule);
 
     ctx.setState({
       ...state,
@@ -86,7 +184,7 @@ export class FitnessPlanState {
   }
 
   @Action(SetCalendarData)
-  setCalendarData(
+  public setCalendarData(
     ctx: StateContext<FitnessPlanStateType>,
     action: SetCalendarData
   ) {
@@ -95,6 +193,8 @@ export class FitnessPlanState {
     const nextCalendar = { ...state.calendarData };
     nextCalendar[action.day] = [...nextCalendar[action.day], action.module];
 
+    //TODO: API handle day
+
     ctx.setState({
       ...state,
       calendarData: nextCalendar
@@ -102,7 +202,7 @@ export class FitnessPlanState {
   }
 
   @Action(RemoveCalendarData)
-  removeCalendarData(
+  public removeCalendarData(
     ctx: StateContext<FitnessPlanStateType>,
     action: RemoveCalendarData
   ) {
@@ -112,6 +212,7 @@ export class FitnessPlanState {
     nextCalendarData[action.day] = nextCalendarData[action.day].filter(
       module => module.id !== action.id
     );
+    //TODO: API hande day
 
     ctx.setState({
       ...state,

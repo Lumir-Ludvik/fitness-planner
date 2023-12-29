@@ -1,3 +1,5 @@
+import { Guid } from "guid-typescript";
+
 export type Days =
   | "Monday"
   | "Tuesday"
@@ -7,8 +9,14 @@ export type Days =
   | "Saturday"
   | "Sunday";
 
+export type ModuleBE = Omit<Module, "image"> & {
+  filename: string;
+  base64Img: string;
+  contentType: string;
+};
+
 export type Module = {
-  id?: number;
+  id?: Guid;
   title: string;
   text: string;
   image: { filename: string; data: Blob };

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { ModuleService } from "../plan/services/module.service";
 import { Module } from "../models/plan/types";
 import { Store } from "@ngxs/store";
 import {
   AddModule,
   UpdateModule
 } from "../states/actions/fitness-plan-state-actions";
+import { Guid } from "guid-typescript";
 
 @Component({
   selector: "app-activity-form",
@@ -18,7 +18,6 @@ export class ActivityFormComponent implements OnInit {
   module: Module | null = null;
   @Output() submitted = new EventEmitter<boolean>();
 
-  private tempIdCounter = 1;
   private isEdit = false;
 
   constructor(
@@ -48,7 +47,10 @@ export class ActivityFormComponent implements OnInit {
   public onSubmit() {
     const module = {
       ...this.activityForm.value,
-      id: this.isEdit ? this.module?.id : this.tempIdCounter++
+      // I really love community packages...
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      id: this.isEdit ? this.module?.id : Guid.create().value
     } as Module;
 
     if (this.isEdit) {

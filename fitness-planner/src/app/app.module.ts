@@ -4,7 +4,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { ActivityFormComponent } from "./activity-form/activity-form.component";
-import { ModuleService } from "./plan/services/module.service";
 import { PlanModule } from "./plan/plan.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -16,6 +15,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 import { NgxsModule } from "@ngxs/store";
 import { FitnessPlanState } from "./states/state/fitness-plan-state";
+import { ApiModule } from "./api/api.module";
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { FitnessPlanState } from "./states/state/fitness-plan-state";
     EditActivityModalComponent
   ],
   imports: [
+    ApiModule,
     NgxsModule.forRoot([FitnessPlanState]),
     BrowserModule,
     AppRoutingModule,
@@ -37,7 +38,6 @@ import { FitnessPlanState } from "./states/state/fitness-plan-state";
     MatDialogModule,
     MatButtonModule
   ],
-  providers: [ModuleService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

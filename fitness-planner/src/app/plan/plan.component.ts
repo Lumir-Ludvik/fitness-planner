@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { CalendarDataType, Days } from "../models/plan/types";
-import { originalOrder } from "../../utils/sort-utils";
+import { originalOrder } from "../utils/sort-utils";
 import { CdkDrag } from "@angular/cdk/drag-drop";
 import { Select, Store } from "@ngxs/store";
 import { Observable, Subscription } from "rxjs";
@@ -27,9 +27,6 @@ export class PlanComponent implements OnInit, OnDestroy {
   };
 
   @Select(FitnessPlanState.getCalendarData)
-  protected readonly moduleTrackBy = moduleTrackBy;
-  protected readonly dayTrackBy = dayTrackBy;
-
   private calendarData$: Observable<CalendarDataType>;
   private subscriptionCalendarData: Subscription | null = null;
 
@@ -54,4 +51,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   public onDrop(item: CdkDrag, dayKey: string) {
     this.store.dispatch(new SetCalendarData(item.data, dayKey as Days));
   }
+
+  protected readonly dayTrackBy = dayTrackBy;
+  protected readonly moduleTrackBy = moduleTrackBy;
 }

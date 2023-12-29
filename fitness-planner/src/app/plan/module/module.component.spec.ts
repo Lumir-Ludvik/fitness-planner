@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ModuleComponent } from "./module.component";
 import { PlanModule } from "../plan.module";
-import { b64toBlob } from "../../../utils/img-utils";
+import { b64toBlob } from "../../utils/img-utils";
 import { TEST_IMAGE } from "../../testing/mocks/test-image-base64";
 import { expectMultipleTexts, findEl } from "../../testing/utils";
 import spyOn = jest.spyOn;
+
 describe("ModuleComponent", () => {
   let fixture: ComponentFixture<ModuleComponent>;
   let module: ModuleComponent;
