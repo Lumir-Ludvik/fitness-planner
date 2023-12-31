@@ -1,0 +1,8 @@
+<div class="header-container">
+  <img class="header-logo" src="../../assets/img/logo.png" alt="" />
+  <h1 routerLink="/">{{ title }}</h1>
+
+  <div *ngFor="let button of navBarButtons">
+    <button [routerLink]="button.redirectUrl">{{ button.text }}</button>
+  </div>
+</div>

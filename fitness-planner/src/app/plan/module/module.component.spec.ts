@@ -3,7 +3,7 @@ import { ModuleComponent } from "./module.component";
 import { PlanModule } from "../plan.module";
 import { b64toBlob } from "../../utils/img-utils";
 import { TEST_IMAGE } from "../../testing/mocks/test-image-base64";
-import { expectMultipleTexts, findEl } from "../../testing/utils";
+import { expectMultipleTexts, findEl } from "../../testing/utils/index.spec";
 import spyOn = jest.spyOn;
 import { Guid } from "guid-typescript";
 

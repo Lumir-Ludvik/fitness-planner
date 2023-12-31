@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { HeaderComponent } from "./header/header.component";
 import { ActivityFormComponent } from "./activity-form/activity-form.component";
 import { PlanModule } from "./plan/plan.module";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -16,11 +15,11 @@ import { MatButtonModule } from "@angular/material/button";
 import { NgxsModule } from "@ngxs/store";
 import { FitnessPlanState } from "./states/state/fitness-plan-state";
 import { ApiModule } from "./api/api.module";
+import { HeaderComponent } from "../stories/header.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     ActivityFormComponent,
     ListOfActivitiesComponent,
     EditActivityModalComponent
@@ -36,7 +35,8 @@ import { ApiModule } from "./api/api.module";
     MatTableModule,
     MatSortModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    HeaderComponent
   ],
   bootstrap: [AppComponent]
 })

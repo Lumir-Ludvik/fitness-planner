@@ -16,10 +16,12 @@
   button {
     padding: 1rem;
     border: none;
+    margin: 0.2rem;
 
     background-color: rgba(111, 214, 193, 0.66);
 
     &:hover {
+      cursor: pointer;
       border-radius: 8px;
       border-color: rgb(227, 125, 50);
       background-color: rgb(227, 125, 50);
