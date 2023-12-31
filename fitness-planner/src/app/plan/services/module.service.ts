@@ -2,6 +2,7 @@ import { Injectable, signal } from "@angular/core";
 import { CalendarDataType, Days, Module } from "../../models/plan/types";
 import { b64toBlob } from "../../utils/img-utils";
 import { TEST_IMAGE } from "../../testing/mocks/test-image-base64";
+import { Guid } from "guid-typescript";
 
 @Injectable({
   providedIn: "root"
@@ -9,7 +10,9 @@ import { TEST_IMAGE } from "../../testing/mocks/test-image-base64";
 export class ModuleService {
   private modules = signal<Module[]>([
     {
-      id: 1,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      id: Guid.create().value,
       image: { data: b64toBlob(TEST_IMAGE), filename: "big-biceps" },
       title: "I the big biceps",
       text: "I wish I was a big biceps"
@@ -31,7 +34,7 @@ export class ModuleService {
   public addModule = (value: Module) =>
     this.modules.mutate(modules => modules.push(value));
 
-  public deleteModule = (id: number) =>
+  public deleteModule = (id: Guid) =>
     this.modules.update(modules => modules.filter(module => module.id !== id));
 
   public updateModule = (nextValue: Module) => {
@@ -59,7 +62,7 @@ export class ModuleService {
       }
     });
 
-  public removeCalendarData = (id: number, day: Days) =>
+  public removeCalendarData = (id: Guid, day: Days) =>
     this.CalendarData.update(data => {
       const module = data[day].filter(x => x.id !== id);
 

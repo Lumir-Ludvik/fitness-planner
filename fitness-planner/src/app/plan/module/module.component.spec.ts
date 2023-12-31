@@ -5,11 +5,15 @@ import { b64toBlob } from "../../utils/img-utils";
 import { TEST_IMAGE } from "../../testing/mocks/test-image-base64";
 import { expectMultipleTexts, findEl } from "../../testing/utils";
 import spyOn = jest.spyOn;
+import { Guid } from "guid-typescript";
 
 describe("ModuleComponent", () => {
   let fixture: ComponentFixture<ModuleComponent>;
   let module: ModuleComponent;
-  const id = 1;
+  //This library is bugged
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
+  const id = Guid.create().value;
   const title = "I the big biceps";
   const text = "I wish I was a big biceps";
   const image = { filename: "big-biceps", data: b64toBlob(TEST_IMAGE) };

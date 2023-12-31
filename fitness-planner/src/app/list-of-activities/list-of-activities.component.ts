@@ -1,4 +1,4 @@
-import { Component, effect, Signal } from "@angular/core";
+import { Component, Signal } from "@angular/core";
 import { Module } from "../models/plan/types";
 import { EditActivityModalComponent } from "./edit-activity-modal/edit-activity-modal.component";
 import { MatDialog } from "@angular/material/dialog";
@@ -21,9 +21,7 @@ export class ListOfActivitiesComponent {
     private readonly moduleStoreService: ModuleStoreService,
     private readonly editModal: MatDialog
   ) {
-    effect(() => {
-      this.tableData = this.moduleStoreService.getAll();
-    });
+    this.tableData = this.moduleStoreService.getAll();
   }
 
   public editModule(id: Guid) {
