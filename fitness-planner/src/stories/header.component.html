@@ -3,6 +3,8 @@
   <h1 routerLink="/">{{ title }}</h1>
 
   <div *ngFor="let button of navBarButtons">
-    <button [routerLink]="button.redirectUrl">{{ button.text }}</button>
+    <button (click)="onClick($event)" [routerLink]="button.redirectUrl">
+      {{ button.text }}
+    </button>
   </div>
 </div>

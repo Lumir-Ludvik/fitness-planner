@@ -45,6 +45,7 @@
     "@angular/compiler-cli": "^16.2.0",
     "@compodoc/compodoc": "^1.1.23",
     "@ngxs/devtools-plugin": "^3.8.2",
+    "@storybook/addon-a11y": "^7.6.10",
     "@storybook/addon-docs": "^7.6.6",
     "@storybook/addon-essentials": "^7.6.6",
     "@storybook/addon-interactions": "^7.6.6",
